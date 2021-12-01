@@ -20,3 +20,12 @@ spec:
     volumeMounts:
     - name: varlog
       mountPath: /var/log
+  - name: sidecar
+    image: busybox
+    args: [/bin/sh, -c, 'tail -n+1 -f /var/log/11-factor-app.log']
+    volumeMounts:
+    - name: varlog
+      mountPath: /var/log
+  volumes:
+  - name: varlog
+    emptyDir: {}
